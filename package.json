@@ -1,0 +1,22 @@
+{
+	"name": "polycrate",
+	"license": "Creative Commons BY-NC (CC BY-NC 4.0)",
+	"maintainers": [
+		"https://github.com/Virg29"
+	],
+	"private": true,
+	"version": "1.0.0",
+	"description": "Nest.js + Vite react app to manage your files. Postgres powered.",
+	"scripts": {
+		"build:vite": "pnpm --filter frontend run build",
+		"start:frontend": "pnpm --filter frontend run dev"
+	},
+	"devDependencies": {
+		"concurrently": "^9.1.0",
+		"make-dir-cli": "^4.0.0",
+		"rimraf": "^6.0.1",
+		"shx": "^0.3.4",
+		"typescript": "^5.7.2"
+	},
+	"packageManager": "pnpm@10.6.5+sha512.cdf928fca20832cd59ec53826492b7dc25dc524d4370b6b4adbf65803d32efaa6c1c88147c0ae4e8d579a6c9eec715757b50d4fa35eea179d868eada4ed043af"
+}

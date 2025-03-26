@@ -1,0 +1,239 @@
+.modalOverlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.75);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+}
+
+.modal {
+	background: white;
+	padding: 2rem;
+	border-radius: 8px;
+	width: 100%;
+	max-width: 400px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.modalContent {
+	background-color: var(--background-elevated);
+	padding: 2rem;
+	border-radius: var(--border-radius-md);
+	width: 100%;
+	max-width: 1000px;
+	border: 1px solid var(--border-color);
+	position: relative;
+}
+
+.splitLayout {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 2rem;
+}
+
+.formSection {
+	padding-right: 2rem;
+	border-right: 1px solid var(--border-color);
+}
+
+.userListSection {
+	padding-left: 1rem;
+	overflow-y: auto;
+	max-height: 80vh;
+}
+
+.userListSection h3 {
+	margin: 0 0 1rem 0;
+	color: var(--text-primary);
+	font-size: 1.2rem;
+}
+
+.userList {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	max-height: 400px;
+	overflow-y: auto;
+	margin-bottom: 1rem;
+}
+
+.userItem {
+	padding: 0.75rem;
+	background-color: var(--background-elevated-2);
+	border-radius: var(--border-radius-sm);
+	border: 1px solid var(--border-color);
+	border-bottom: 1px solid #eee;
+}
+
+.userItem:last-child {
+	border-bottom: none;
+}
+
+.userName {
+	font-weight: 600;
+	color: var(--text-primary);
+	margin-bottom: 0.25rem;
+}
+
+.userEmail {
+	color: var(--text-tertiary);
+	font-size: 0.9rem;
+	margin-bottom: 0.25rem;
+}
+
+.userRole {
+	color: var(--primary);
+	font-size: 0.8rem;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	margin-top: 0.25rem;
+}
+
+.modalContent h2 {
+	margin: 0 0 1.5rem 0;
+	color: var(--text-primary);
+	font-size: 1.5rem;
+}
+
+.formGroup {
+	margin-bottom: 1.5rem;
+}
+
+.formGroup label {
+	display: block;
+	margin-bottom: 0.5rem;
+	color: var(--text-secondary);
+	font-size: 0.875rem;
+}
+
+.formGroup input,
+.formGroup select {
+	width: 100%;
+	padding: 0.75rem;
+	background-color: var(--background-elevated-2);
+	border: 1px solid var(--border-color);
+	border-radius: var(--border-radius-sm);
+	color: var(--text-primary);
+	font-size: 0.875rem;
+	transition: border-color 0.2s;
+}
+
+.formGroup input:focus,
+.formGroup select:focus {
+	outline: none;
+	border-color: var(--primary);
+}
+
+.error {
+	color: var(--error);
+	margin-bottom: 1rem;
+	padding: 0.5rem;
+	border-radius: var(--border-radius-sm);
+	background-color: rgba(255, 68, 68, 0.1);
+	font-size: 0.875rem;
+}
+
+.success {
+	color: var(--success);
+	margin-bottom: 1rem;
+	padding: 0.5rem;
+	border-radius: var(--border-radius-sm);
+	background-color: rgba(76, 175, 80, 0.1);
+	font-size: 0.875rem;
+}
+
+.buttonGroup {
+	display: flex;
+	justify-content: flex-end;
+	gap: 1rem;
+	margin-top: 2rem;
+}
+
+.submitButton,
+.cancelButton {
+	padding: 0.625rem 1rem;
+	border-radius: var(--border-radius-md);
+	border: none;
+	cursor: pointer;
+	font-size: 0.875rem;
+}
+
+.submitButton {
+	background-color: var(--primary);
+	color: var(--text-primary);
+	font-weight: 500;
+	transition: background-color 0.2s;
+}
+
+.submitButton:hover:not(:disabled) {
+	background-color: var(--primary-hover);
+}
+
+.cancelButton {
+	background-color: transparent;
+	border: 1px solid var(--border-color);
+	color: var(--text-secondary);
+	transition: all 0.2s;
+}
+
+.cancelButton:hover:not(:disabled) {
+	background-color: var(--background-elevated-3);
+}
+
+.closeButton {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	background: none;
+	border: none;
+	color: var(--text-tertiary);
+	font-size: 1.5rem;
+	cursor: pointer;
+	padding: 0.25rem;
+	line-height: 1;
+	transition: color 0.2s;
+}
+
+.closeButton:hover {
+	color: var(--text-primary);
+}
+
+.pagination {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+	margin-top: 1rem;
+	padding: 0.5rem;
+}
+
+.paginationButton {
+	padding: 0.5rem 1rem;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	background-color: #fff;
+	cursor: pointer;
+}
+
+.paginationButton:disabled {
+	background-color: #f0f0f0;
+	cursor: not-allowed;
+	opacity: 0.6;
+}
+
+.pageInfo {
+	font-size: 0.9rem;
+	color: #666;
+}
+
+.loadingMore {
+	text-align: center;
+	padding: 1rem;
+	color: var(--text-tertiary);
+	font-size: 0.9rem;
+}

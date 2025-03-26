@@ -1,0 +1,38 @@
+.tag {
+	display: inline-flex;
+	align-items: center;
+	margin: 0 4px 4px 0;
+	padding: 0 7px;
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 20px;
+	border-radius: 2em;
+	background-color: #ddf4ff;
+	color: #0969da;
+	border: 1px solid transparent;
+	white-space: nowrap;
+}
+
+.tag:hover {
+	background-color: #b6e3ff;
+	text-decoration: none;
+}
+
+.removeButton {
+	margin-left: 4px;
+	padding: 0;
+	background: none;
+	border: none;
+	font-size: 14px;
+	font-weight: bold;
+	color: #0969da;
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0.8;
+}
+
+.removeButton:hover {
+	opacity: 1;
+}

@@ -1,0 +1,59 @@
+.modalOverlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.75);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1100;
+}
+
+.modalContent {
+	background-color: var(--background-elevated);
+	border-radius: var(--border-radius-lg);
+	width: 90vw;
+	height: 90vh;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	border: 1px solid var(--border-color);
+}
+
+.header {
+	padding: 1rem;
+	border-bottom: 1px solid var(--border-color);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.header h3 {
+	margin: 0;
+	color: var(--text-primary);
+	font-size: 1.2rem;
+}
+
+.closeButton {
+	background: none;
+	border: none;
+	color: var(--text-tertiary);
+	font-size: 1.5rem;
+	cursor: pointer;
+	padding: 0.25rem 0.5rem;
+	line-height: 1;
+}
+
+.closeButton:hover {
+	color: var(--text-primary);
+}
+
+.viewerContainer {
+	flex: 1;
+	position: relative;
+	background-color: var(--background-elevated-2);
+	border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg);
+	overflow: hidden;
+}

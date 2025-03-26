@@ -1,0 +1,64 @@
+.modalOverlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.75);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+}
+
+.modalContent {
+	background-color: var(--background-elevated);
+	border-radius: var(--border-radius-lg);
+	padding: 1rem;
+	width: 95%;
+	max-width: 1200px;
+	max-height: 95vh;
+	position: relative;
+	border: 1px solid var(--border-color);
+	display: flex;
+	flex-direction: column;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 1rem;
+}
+
+.header h3 {
+	margin: 0;
+	color: var(--text-primary);
+}
+
+.closeButton {
+	background: none;
+	border: none;
+	color: var(--text-primary);
+	font-size: 1.5rem;
+	cursor: pointer;
+	padding: 0.5rem;
+}
+
+.closeButton:hover {
+	color: var(--text-secondary);
+}
+
+.imageContainer {
+	flex: 1;
+	overflow: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.imageContainer img {
+	max-width: 100%;
+	max-height: calc(95vh - 4rem);
+	object-fit: contain;
+}

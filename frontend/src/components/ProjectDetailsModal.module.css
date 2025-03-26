@@ -1,0 +1,299 @@
+.modalOverlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.75);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+}
+
+.modalContent {
+	background-color: var(--background-elevated);
+	border-radius: var(--border-radius-lg);
+	padding: 2rem;
+	width: 95%;
+	max-width: 1400px;
+	height: 95vh;
+	position: relative;
+	border: 1px solid var(--border-color);
+}
+
+.modalLayout {
+	display: grid;
+	grid-template-columns: minmax(400px, 1fr) 2fr;
+	gap: 2rem;
+	height: 100%;
+	overflow: hidden;
+}
+
+.leftPanel {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	overflow-y: auto;
+	padding-right: 1rem;
+	position: relative;
+	padding-bottom: 5rem; /* Add space for the button group */
+}
+
+.rightPanel {
+	display: flex;
+	flex-direction: column;
+	border-left: 1px solid var(--border-color);
+	padding-left: 2rem;
+	overflow-y: scroll;
+}
+
+.closeButton {
+	position: absolute;
+	top: 0.5rem;
+	right: 0.5rem;
+	background: none;
+	border: none;
+	color: var(--text-tertiary);
+	font-size: 1.5rem;
+	cursor: pointer;
+	padding: 0.25rem 0.5rem;
+	line-height: 1;
+	z-index: 1;
+}
+
+.closeButton:hover {
+	color: var(--text-primary);
+}
+
+.header {
+	padding-bottom: 1.5rem;
+	border-bottom: 1px solid var(--border-color);
+}
+
+.header h2 {
+	font-size: 1.8rem;
+	color: var(--text-primary);
+	margin: 0 0 1rem 0;
+}
+
+.description {
+	color: var(--text-secondary);
+	font-size: 1rem;
+	line-height: 1.6;
+	margin: 0;
+}
+
+.projectDetails {
+	background-color: var(--background-elevated-2);
+	padding: 1.5rem;
+	border-radius: var(--border-radius-lg);
+}
+
+.detailsGrid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 1.5rem;
+}
+
+.detailItem {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.label {
+	color: var(--text-tertiary);
+	font-size: 0.875rem;
+}
+
+.collaboratorsSection {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.collaboratorsSection h3 {
+	color: var(--text-primary);
+	font-size: 1.2rem;
+	margin: 0;
+}
+
+.collaboratorsList {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+}
+
+.collaborator {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0.75rem 1rem;
+	background-color: var(--background-elevated-2);
+	border-radius: var(--border-radius-sm);
+}
+
+.collaboratorName {
+	color: var(--text-primary);
+	font-weight: 500;
+}
+
+.collaboratorEmail {
+	color: var(--text-tertiary);
+	font-size: 0.875rem;
+}
+
+.newVersionSection {
+	padding: 1.5rem;
+	background-color: #262626;
+	border-radius: 8px;
+	margin-bottom: 1.5rem;
+}
+
+.newVersionForm {
+	display: flex;
+	gap: 1rem;
+	align-items: flex-start;
+}
+
+.formInputs {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+}
+
+.formInputs input,
+.formInputs textarea {
+	width: 100%;
+	padding: 0.75rem;
+	background-color: #1e1e1e;
+	border: 1px solid #3d3d3d;
+	border-radius: 4px;
+	color: #ffffff;
+	font-size: 0.875rem;
+	resize: vertical;
+}
+
+.formInputs input:focus,
+.formInputs textarea:focus {
+	outline: none;
+	border-color: #6200ea;
+}
+
+.createVersionButton {
+	padding: 0.75rem 1.5rem;
+	height: 40px;
+	background-color: #6200ea;
+	color: #ffffff;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 0.875rem;
+	white-space: nowrap;
+	transition: background-color 0.2s;
+}
+
+.createVersionButton:hover:not(:disabled) {
+	background-color: #7722ff;
+}
+
+.createVersionButton:disabled {
+	opacity: 0.7;
+	cursor: not-allowed;
+}
+
+.versionsList {
+	flex: 1;
+	overflow-y: auto;
+	padding-right: 1rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.versionItem {
+	padding: 1rem;
+	background-color: #262626;
+	border-radius: 4px;
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+}
+
+.versionItem .versionHeader {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.versionTag {
+	color: #6200ea;
+	font-weight: 500;
+	font-size: 1rem;
+}
+
+.versionDate {
+	color: #808080;
+	font-size: 0.875rem;
+}
+
+.versionDescription {
+	color: #b3b3b3;
+	margin: 0;
+	font-size: 0.875rem;
+	line-height: 1.5;
+}
+
+.versionMeta {
+	color: #808080;
+	font-size: 0.75rem;
+	padding-top: 0.5rem;
+	border-top: 1px solid #3d3d3d;
+}
+
+.loading,
+.error {
+	text-align: center;
+	padding: 2rem;
+	color: var(--text-tertiary);
+}
+
+.error {
+	color: var(--error);
+}
+
+.buttonGroup {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 1rem;
+	background-color: var(--background-elevated);
+	padding: 1rem 0;
+	display: flex;
+	justify-content: flex-end;
+	gap: 1rem;
+	border-top: 1px solid var(--border-color);
+}
+
+.saveButton {
+	padding: 0.625rem 1.5rem;
+	background-color: var(--success);
+	color: var(--text-primary);
+	border: none;
+	border-radius: var(--border-radius-md);
+	font-size: 0.875rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition: background-color 0.2s;
+}
+
+.saveButton:hover:not(:disabled) {
+	background-color: var(--success-hover);
+}
+
+.saveButton:disabled {
+	opacity: 0.7;
+	cursor: not-allowed;
+}

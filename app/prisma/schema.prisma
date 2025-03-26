@@ -1,0 +1,90 @@
+generator client {
+    provider        = "prisma-client-js"
+    previewFeatures = ["clientExtensions", "fullTextSearch"]
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL_APP")
+}
+
+model User {
+    id String @id @unique @default(uuid()) @db.Uuid
+
+    name     String
+    email    String @unique
+    password String
+    role_id  String @db.Uuid
+
+    // Relations
+    role                   Role      @relation(fields: [role_id], references: [id])
+    created_projects       Project[] @relation("ProjectCreator")
+    collaborating_projects Project[] @relation("ProjectCollaborators")
+    created_at             DateTime  @default(now())
+    updated_at             DateTime  @updatedAt
+}
+
+model Role {
+    id String @id @unique @default(uuid()) @db.Uuid
+
+    name        String    @unique @db.VarChar(125)
+    description String?   @default("")
+    created     DateTime  @default(now())
+    updated     DateTime? @updatedAt
+
+    User User[]
+}
+
+model Project {
+    id          String   @id @unique @default(uuid()) @db.Uuid
+    name        String
+    description String   @db.Text
+    tags        String[] @default([])
+    created_at  DateTime @default(now())
+    updated_at  DateTime @updatedAt
+    creator_id  String   @db.Uuid
+
+    // Relations
+    creator       User      @relation("ProjectCreator", fields: [creator_id], references: [id])
+    collaborators User[]    @relation("ProjectCollaborators")
+    versions      Version[]
+
+    @@index([name])
+}
+
+model Version {
+    id          String   @id @unique @default(uuid()) @db.Uuid
+    version_tag String // e.g., "v1.0.0" or "draft-2"
+    project_id  String   @db.Uuid
+    created_at  DateTime @default(now())
+    description String?  @db.Text // Optional version description/changelog
+
+    // Relations
+    project Project       @relation(fields: [project_id], references: [id], onDelete: Cascade)
+    files   ProjectFile[]
+
+    @@unique([project_id, version_tag])
+    @@index([project_id])
+}
+
+model ProjectFile {
+    id          String   @id @unique @default(uuid()) @db.Uuid
+    name        String
+    description String   @db.Text
+    version_id  String   @db.Uuid
+    created_at  DateTime @default(now())
+    updated_at  DateTime @updatedAt
+
+    // File metadata
+    mime_type String // Actual MIME type of the file (e.g., application/pdf, image/png)
+    size      Int // File size in bytes
+
+    // File content stored directly in DB
+    content Bytes // The actual file content as binary data
+
+    // Relations
+    version Version @relation(fields: [version_id], references: [id], onDelete: Cascade)
+
+    @@index([version_id])
+    @@index([mime_type])
+}

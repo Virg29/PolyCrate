@@ -1,0 +1,105 @@
+.modalOverlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.75);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+}
+
+.modalContent {
+	background-color: var(--background-elevated);
+	border-radius: var(--border-radius-lg);
+	padding: 1rem;
+	width: 95%;
+	max-width: 1200px;
+	max-height: 95vh;
+	position: relative;
+	border: 1px solid var(--border-color);
+	display: flex;
+	flex-direction: column;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 1rem;
+}
+
+.header h3 {
+	margin: 0;
+	color: var(--text-primary);
+}
+
+.closeButton {
+	background: none;
+	border: none;
+	color: var(--text-primary);
+	font-size: 1.5rem;
+	cursor: pointer;
+	padding: 0.5rem;
+}
+
+.closeButton:hover {
+	color: var(--text-secondary);
+}
+
+.docContainer {
+	flex: 1;
+	overflow: auto;
+	background-color: var(--background-elevated-2);
+	border-radius: var(--border-radius-md);
+	padding: 1rem;
+	/* Override doc viewer default styles to match our theme */
+	:global(.react-doc-viewer) {
+		background-color: transparent;
+		min-height: 500px;
+	}
+}
+
+.excelTable {
+	overflow: auto;
+	max-height: calc(90vh - 100px);
+	padding: 1rem;
+}
+
+.excelTable table {
+	border-collapse: collapse;
+	width: 100%;
+	background: var(--background-elevated);
+}
+
+.excelTable td {
+	border: 1px solid var(--border-color);
+	padding: 8px;
+	font-size: 0.875rem;
+}
+
+.excelTable tr:nth-child(1) {
+	background-color: var(--background-elevated-2);
+	font-weight: 600;
+}
+
+.wordContainer {
+	overflow: auto;
+	max-height: calc(90vh - 100px);
+	padding: 1rem;
+	background: white;
+}
+
+.wordDocument {
+	background: white;
+	padding: 2rem;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.error {
+	color: var(--error);
+	padding: 1rem;
+	text-align: center;
+}

@@ -1,0 +1,75 @@
+.container {
+	position: relative;
+	width: 100%;
+}
+
+.searchInputContainer {
+	margin-bottom: 0.5rem;
+}
+
+.searchInput {
+	width: 100%;
+	padding: 0.75rem;
+	background-color: var(--background-elevated);
+	border: 1px solid var(--border-color);
+	border-radius: var(--border-radius-sm);
+	color: var(--text-primary);
+	font-size: 0.875rem;
+	transition: border-color 0.2s;
+}
+
+.searchInput:focus {
+	outline: none;
+	border-color: var(--primary);
+}
+
+.usersList {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	right: 0;
+	background-color: var(--background-elevated);
+	border: 1px solid var(--border-color);
+	border-radius: var(--border-radius-sm);
+	max-height: 300px;
+	overflow-y: auto;
+	z-index: 1000;
+}
+
+.userItem {
+	padding: 0.75rem;
+	cursor: pointer;
+	transition: background-color 0.2s;
+	border-bottom: 1px solid var(--border-color);
+}
+
+.userItem:last-child {
+	border-bottom: none;
+}
+
+.userItem:hover {
+	background-color: var(--background-elevated-2);
+}
+
+.userName {
+	color: var(--text-primary);
+	font-weight: 500;
+	margin-bottom: 0.25rem;
+}
+
+.userEmail {
+	color: var(--text-tertiary);
+	font-size: 0.75rem;
+}
+
+.loading {
+	color: var(--text-tertiary);
+	font-size: 0.875rem;
+	padding: 0.5rem 0;
+}
+
+.error {
+	color: var(--error);
+	font-size: 0.875rem;
+	padding: 0.5rem 0;
+}

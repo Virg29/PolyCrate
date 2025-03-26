@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "CommonJS",
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "@types/*": ["types/*"],
+      "@frontend/*": ["frontend/src/*"], // Алиас для типов и модулей frontend
+      "@electron/*": ["app/src/*"], // Алиас для типов и модулей Electron
+      "@cpp/*": ["cpp/*"]
+    },
+    "typeRoots": ["./types", "./node_modules/@types"], // Каталоги, где искать типы
+    "esModuleInterop": true, // Улучшение поддержки импорта ES6 модулей
+    "skipLibCheck": true, // Пропуск проверки типов в node_modules
+    "outDir": "./dist", // Выходной каталог для компиляции
+    "moduleResolution": "node", // Используемая стратегия разрешения модулей
+    "sourceMap": true, // Генерация карт для отладки
+    "strictNullChecks": true // Строгая проверка на null/undefined
+  },
+  "include": [
+    "frontend/src", // Подключение исходников frontend
+    "app/src", // Подключение исходников Electron
+    "types" // Подключение глобальных типов
+  ],
+  "exclude": [
+    "/**/node_modules", // Исключение node_modules
+    "/**/dist" // Исключение папки с собранным кодом
+  ]
+}

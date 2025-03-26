@@ -1,0 +1,10 @@
+.previewBadge {
+	display: inline-flex;
+	align-items: center;
+	padding: 2px 6px;
+	border-radius: 4px;
+	font-size: 0.75rem;
+	background-color: var(--success);
+	color: white;
+	margin-left: 0.5rem;
+}
