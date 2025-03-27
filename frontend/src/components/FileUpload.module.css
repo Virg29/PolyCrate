@@ -166,3 +166,62 @@
 .deleteButton:hover {
 	transform: scale(1.1);
 }
+
+.progressText {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: rgba(0, 0, 0, 0.7);
+	padding: 8px 16px;
+	border-radius: var(--border-radius-sm);
+	font-size: 1rem;
+	color: var(--text-primary);
+	z-index: 10;
+	pointer-events: none;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.loading {
+	position: relative;
+	pointer-events: none;
+}
+
+.loading::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: var(--background-elevated-2);
+	opacity: 0.8;
+	border-radius: var(--border-radius-md);
+}
+
+.loading .dropzone {
+	border-style: solid;
+	background: var(--background-elevated-2);
+	opacity: 0.9;
+}
+
+.loading .fileInput,
+.loading .icon,
+.loading .subtitle {
+	display: none;
+}
+
+.loading .uploadMessage {
+	position: relative;
+	z-index: 2;
+	color: var(--text-primary);
+}
+
+.loading .uploadMessage p {
+	color: var(--text-primary);
+	font-weight: 500;
+	font-size: 0.9rem;
+}
+
+.loading .fileInput {
+	display: none;
+}

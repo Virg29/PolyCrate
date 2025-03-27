@@ -22,7 +22,7 @@ export const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB
 export class FileDto {
 	@ApiProperty({ description: 'Name of the file' })
 	@IsString()
-	@Matches(/^[a-zA-Z0-9-_.\(\)]+$/, {
+	@Matches(/^[а-яА-Я\sa-zA-Z0-9-_.\(\)]+$/, {
 		message:
 			'File name can only contain letters, numbers, hyphens, underscores, and dots',
 	})

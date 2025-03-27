@@ -178,22 +178,24 @@ export const FileUpload: React.FC<FileUploadProps> = ({
 				onDragOver={handleDragOver}
 				onDragLeave={handleDragLeave}
 			>
-				<input
-					type="file"
-					onChange={(e) =>
-						handleFiles(e.target.files || new FileList())
-					}
-					className={styles.fileInput}
-					multiple
-					accept={accept}
-				/>
-				<div className={styles.uploadMessage}>
-					<span className={styles.icon}>📁</span>
-					<p>Drag & drop files here or click to select</p>
-					<p className={styles.subtitle}>
-						You can also paste files or screenshots
-					</p>
-				</div>
+				<>
+					<input
+						type="file"
+						onChange={(e) =>
+							handleFiles(e.target.files || new FileList())
+						}
+						className={styles.fileInput}
+						multiple
+						accept={accept}
+					/>
+					<div className={styles.uploadMessage}>
+						<span className={styles.icon}>📁</span>
+						<p>Drag & drop files here or click to select</p>
+						<p className={styles.subtitle}>
+							You can also paste files or screenshots
+						</p>
+					</div>
+				</>
 			</div>
 
 			{files.length > 0 && (

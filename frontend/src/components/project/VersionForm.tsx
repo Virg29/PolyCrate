@@ -14,6 +14,7 @@ interface VersionFormProps {
 	previousVersions?: Version[];
 	projectId?: string;
 	versionCreated?: boolean;
+	isFilesUploading?: boolean;
 }
 
 export const VersionForm: FC<VersionFormProps> = ({
@@ -30,12 +31,14 @@ export const VersionForm: FC<VersionFormProps> = ({
 	const [files, setFiles] = useState<FileWithPreview[]>([]);
 	const [isLoadingPrevious, setIsLoadingPrevious] = useState(false);
 	const [wasSubmitting, setWasSubmitting] = useState(false);
+	const [isFilesUploading, setIsFilesUploading] = useState(false);
 
 	// Track isSubmitting changes to detect successful form submission
 	useEffect(() => {
 		// If was submitting and now it's not, the operation completed
 		if (wasSubmitting && !isSubmitting) {
 			// Reset the form
+			setIsFilesUploading(false);
 			setFormData({ version_tag: '', description: '' });
 			setFiles([]);
 		}
@@ -54,6 +57,7 @@ export const VersionForm: FC<VersionFormProps> = ({
 
 	const handleSubmit = async (e: FormEvent) => {
 		e.preventDefault();
+		setIsFilesUploading(true);
 		await onSubmit({
 			...formData,
 			files,
@@ -168,12 +172,15 @@ export const VersionForm: FC<VersionFormProps> = ({
 						rows={2}
 					/>
 					<div className={styles.fileUploadContainer}>
-						<FileUpload
-							onFilesChange={setFiles}
-							maxFileSize={5 * 1024 * 1024} // 5MB
-							existingFiles={files}
-						/>
-						{hasPreviousVersions && (
+						{!isFilesUploading && (
+							<FileUpload
+								onFilesChange={setFiles}
+								maxFileSize={5 * 1024 * 1024 * 10} // 50MB
+								existingFiles={files}
+							/>
+						)}
+
+						{!isFilesUploading && hasPreviousVersions && (
 							<button
 								type="button"
 								className={styles.usePreviousButton}
@@ -185,12 +192,18 @@ export const VersionForm: FC<VersionFormProps> = ({
 									: 'Use Previous'}
 							</button>
 						)}
+
+						{isFilesUploading && (
+							<div className={styles.uploadMessage}>
+								<div className={styles.spinner} />
+							</div>
+						)}
 					</div>
 				</div>
 				<button
 					type="submit"
 					className={styles.createVersionButton}
-					disabled={isSubmitting}
+					disabled={isSubmitting || isFilesUploading}
 				>
 					{isSubmitting ? 'Creating...' : '+ Add Version'}
 				</button>
