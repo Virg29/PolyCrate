@@ -28,11 +28,7 @@ USER node
 COPY --from=builder --chown=node:node /app/dist ./dist
 
 # Create a script to generate runtime config
-RUN echo '#!/bin/sh\n\
-echo "window.ENV = {\n\
-  VITE_API_URL: \"$VITE_API_URL\"\n\
-};" > /app/dist/config.js' > /app/generate-config.sh && \
-chmod +x /app/generate-config.sh
+RUN chmod +x /app/generate-config.sh
 
 EXPOSE 5173
 

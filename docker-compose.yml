@@ -37,7 +37,7 @@ services:
             args:
                 VITE_API_URL: 'http://localhost:3000'
         environment:
-            - VITE_API_URL=http://localhost:3000  # Adjust this URL as needed
+            - VITE_API_URL=http://localhost:3000 # Adjust this URL as needed
         ports:
             - '5173:5173'
         depends_on:

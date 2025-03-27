@@ -2,14 +2,17 @@ import axios, { AxiosError } from 'axios';
 import { authService } from './auth.service';
 
 declare global {
-    interface Window {
-        ENV?: {
-            VITE_API_URL?: string;
-        };
-    }
+	interface Window {
+		ENV?: {
+			VITE_API_URL?: string;
+		};
+	}
 }
 
-const API_URL = window.ENV?.VITE_API_URL || import.meta.env.VITE_API_URL || 'http://127.0.0.1:3000';
+const API_URL =
+	window.ENV?.VITE_API_URL ||
+	import.meta.env.VITE_API_URL ||
+	'http://127.0.0.1:3000';
 
 const apiClient = axios.create({
 	baseURL: API_URL,
