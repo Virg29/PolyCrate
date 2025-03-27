@@ -1,4 +1,4 @@
-#!/bin/sh\n\
-echo "window.ENV = {\n\
-  VITE_API_URL: \"$VITE_API_URL\"\n\
-};" > /app/dist/config.js
+#!/bin/sh
+echo "window.ENV = {\
+  VITE_API_URL: \"$VITE_API_URL\"\
+};" > /app/src/config.tsx
