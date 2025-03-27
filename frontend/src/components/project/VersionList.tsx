@@ -188,7 +188,8 @@ export const VersionList: FC<VersionListProps> = ({ versions }) => {
 		const fileCategory = Object.entries(previewableMimeTypes).find(
 			([_, category]) =>
 				category.types.includes(file.mime_type) &&
-				(!category.checkExtension || category.checkExtension(file.name))
+				(!category.checkExtension ||
+					category.checkExtension(file.name)),
 		);
 
 		if (!fileCategory) {
@@ -196,7 +197,7 @@ export const VersionList: FC<VersionListProps> = ({ versions }) => {
 		}
 
 		const [type] = fileCategory;
-		
+
 		switch (type) {
 			case 'image':
 				return (
@@ -285,9 +286,7 @@ export const VersionList: FC<VersionListProps> = ({ versions }) => {
 			case 'plaintext':
 				return (
 					<div className={styles.filePreview}>
-						<div className={styles.filePlaceholder}>
-							Text File
-						</div>
+						<div className={styles.filePlaceholder}>Text File</div>
 					</div>
 				);
 			default:
@@ -319,7 +318,7 @@ export const VersionList: FC<VersionListProps> = ({ versions }) => {
 								}}
 								title="Download all files"
 							>
-									⯆
+								⯆
 							</button>
 						)}
 					</div>
@@ -338,7 +337,7 @@ export const VersionList: FC<VersionListProps> = ({ versions }) => {
 										handleFileDownload(file.id, file.name)
 									}
 								>
-										{getFilePreviewComponent(file)}
+									{getFilePreviewComponent(file)}
 									<div className={styles.fileInfo}>
 										<span className={styles.fileName}>
 											{file.name}

@@ -7,7 +7,9 @@
 }
 
 .loginForm {
-	background-color: var(--background-elevated);
+	background: url('../../public/logo.webp') center no-repeat;
+	background-size: 160%;
+
 	padding: 2rem;
 	border-radius: var(--border-radius-lg);
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -37,7 +39,7 @@
 }
 
 .loginForm h2 {
-	color: var(--text-primary);
+	color: var(--tag-text);
 	margin-bottom: 1rem;
 }
 
