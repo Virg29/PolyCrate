@@ -26,6 +26,7 @@ USER node
 
 # Copy the built assets
 COPY --from=builder --chown=node:node /app/dist ./dist
+COPY --from=builder --chown=node:node /app/generate-config.sh ./generate-config.sh
 
 # Create a script to generate runtime config
 RUN chmod +x /app/generate-config.sh
