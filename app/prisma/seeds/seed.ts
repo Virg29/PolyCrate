@@ -40,25 +40,23 @@ async function main() {
 		},
 	});
 
-	for (let i = 0; i < 50; i++) {
-		const ownerUser = await prisma.user.upsert({
-			where: { email: 'admin@owner.com' },
-			update: {
-				name: 'App Owner' + i,
-				email: `admin${i}@owner.com`,
-				password:
-					'$2a$10$6YSvK2c/GVVV.5.fbW1J9er7ZoMx1kg.PhIIAYF.NutesEIlRKRwm', // 123qwerty!
-				role_id: adminRole.id,
-			},
-			create: {
-				name: 'App Owner' + i,
-				email: `admin${i}@owner.com`,
-				password:
-					'$2a$10$6YSvK2c/GVVV.5.fbW1J9er7ZoMx1kg.PhIIAYF.NutesEIlRKRwm', // 123qwerty!
-				role_id: adminRole.id,
-			},
-		});
-	}
+	const ownerUser = await prisma.user.upsert({
+		where: { email: 'admin@owner.com' },
+		update: {
+			name: 'App Owner',
+			email: `admin@owner.com`,
+			password:
+				'$2a$10$6YSvK2c/GVVV.5.fbW1J9er7ZoMx1kg.PhIIAYF.NutesEIlRKRwm', // 123qwerty!
+			role_id: adminRole.id,
+		},
+		create: {
+			name: 'App Owner',
+			email: `admin@owner.com`,
+			password:
+				'$2a$10$6YSvK2c/GVVV.5.fbW1J9er7ZoMx1kg.PhIIAYF.NutesEIlRKRwm', // 123qwerty!
+			role_id: adminRole.id,
+		},
+	});
 }
 
 main()

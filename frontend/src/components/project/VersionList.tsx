@@ -121,46 +121,6 @@ export const VersionList: FC<VersionListProps> = ({ versions }) => {
 		}
 	};
 
-	const isImageFile = (mimeType: string) => {
-		return mimeType.startsWith('image/');
-	};
-
-	const isSTLFile = (mimeType: string, fileName: string) => {
-		return (
-			(mimeType === 'application/octet-stream' ||
-				mimeType === 'model/stl') &&
-			fileName.toLowerCase().endsWith('.stl')
-		);
-	};
-
-	const isPDFFile = (mimeType: string) => {
-		return mimeType === 'application/pdf';
-	};
-
-	const isPlainTextFile = (mimeType: string, fileName: string) => {
-		return (
-			mimeType === 'text/plain' && fileName.toLowerCase().endsWith('.txt')
-		);
-	};
-
-	const isExcelFile = (mimeType: string, fileName: string) => {
-		return (
-			[
-				'application/vnd.ms-excel',
-				'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-			].includes(mimeType) || /\.(xls|xlsx)$/i.test(fileName)
-		);
-	};
-
-	const isWordFile = (mimeType: string, fileName: string) => {
-		return (
-			[
-				'application/msword',
-				'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-			].includes(mimeType) || /\.(doc|docx)$/i.test(fileName)
-		);
-	};
-
 	const handleSTLPreview = async (fileId: string, fileName: string) => {
 		try {
 			const response = await apiClient.get(`/files/${fileId}/download`, {
@@ -224,6 +184,117 @@ export const VersionList: FC<VersionListProps> = ({ versions }) => {
 		return null;
 	};
 
+	const getFilePreviewComponent = (file: Version['files'][0]) => {
+		const fileCategory = Object.entries(previewableMimeTypes).find(
+			([_, category]) =>
+				category.types.includes(file.mime_type) &&
+				(!category.checkExtension || category.checkExtension(file.name))
+		);
+
+		if (!fileCategory) {
+			return <div className={styles.fileIcon}>📄</div>;
+		}
+
+		const [type] = fileCategory;
+		
+		switch (type) {
+			case 'image':
+				return (
+					<div className={styles.filePreview}>
+						{imageData[file.id] ? (
+							<img
+								src={imageData[file.id]}
+								alt={file.name}
+								onClick={(e) => {
+									e.stopPropagation();
+									setSelectedImage({
+										data: imageData[file.id],
+										name: file.name,
+									});
+								}}
+							/>
+						) : (
+							<div
+								className={styles.filePlaceholder}
+								onClick={(e) => {
+									e.stopPropagation();
+									loadImagePreview(file.id);
+								}}
+							>
+								Click to preview
+							</div>
+						)}
+					</div>
+				);
+			case 'stl':
+				return (
+					<div className={styles.filePreview}>
+						<div
+							className={styles.filePlaceholder}
+							onClick={(e) => {
+								e.stopPropagation();
+								handleSTLPreview(file.id, file.name);
+							}}
+						>
+							Preview 3D Model
+						</div>
+					</div>
+				);
+			case 'pdf':
+				return (
+					<div className={styles.filePreview}>
+						<div
+							className={styles.filePlaceholder}
+							onClick={(e) => {
+								e.stopPropagation();
+								handlePDFPreview(file.id, file.name);
+							}}
+						>
+							Preview PDF
+						</div>
+					</div>
+				);
+			case 'excel':
+				return (
+					<div className={styles.filePreview}>
+						<div
+							className={styles.filePlaceholder}
+							onClick={(e) => {
+								e.stopPropagation();
+								handleExcelPreview(file.id, file.name);
+							}}
+						>
+							Preview Excel
+						</div>
+					</div>
+				);
+			case 'word':
+				return (
+					<div className={styles.filePreview}>
+						<div
+							className={styles.filePlaceholder}
+							onClick={(e) => {
+								e.stopPropagation();
+								handleWordPreview(file.id, file.name);
+							}}
+						>
+							Preview Word
+						</div>
+					</div>
+				);
+			case 'plaintext':
+				return (
+					<div className={styles.filePreview}>
+						<div className={styles.filePlaceholder}>
+							Text File
+						</div>
+					</div>
+				);
+			default:
+				return <div className={styles.fileIcon}>📄</div>;
+		}
+	};
+
 	return (
 		<div className={styles.versionList}>
 			{versions.map((version) => (
@@ -248,7 +319,7 @@ export const VersionList: FC<VersionListProps> = ({ versions }) => {
 								}}
 								title="Download all files"
 							>
-								⯆
+									⯆
 							</button>
 						)}
 					</div>
@@ -267,130 +338,7 @@ export const VersionList: FC<VersionListProps> = ({ versions }) => {
 										handleFileDownload(file.id, file.name)
 									}
 								>
-									{isImageFile(file.mime_type) ? (
-										<div className={styles.filePreview}>
-											{imageData[file.id] ? (
-												<img
-													src={imageData[file.id]}
-													alt={file.name}
-													onClick={(e) => {
-														e.stopPropagation();
-														setSelectedImage({
-															data: imageData[
-																file.id
-															],
-															name: file.name,
-														});
-													}}
-												/>
-											) : (
-												<div
-													className={
-														styles.filePlaceholder
-													}
-													onClick={(e) => {
-														e.stopPropagation();
-														loadImagePreview(
-															file.id,
-														);
-													}}
-												>
-													Click to preview
-												</div>
-											)}
-										</div>
-									) : isSTLFile(file.mime_type, file.name) ? (
-										<div className={styles.filePreview}>
-											<div
-												className={
-													styles.filePlaceholder
-												}
-												onClick={(e) => {
-													e.stopPropagation();
-													handleSTLPreview(
-														file.id,
-														file.name,
-													);
-												}}
-											>
-												Preview 3D Model
-											</div>
-										</div>
-									) : isPDFFile(file.mime_type) ? (
-										<div className={styles.filePreview}>
-											<div
-												className={
-													styles.filePlaceholder
-												}
-												onClick={(e) => {
-													e.stopPropagation();
-													handlePDFPreview(
-														file.id,
-														file.name,
-													);
-												}}
-											>
-												Preview PDF
-											</div>
-										</div>
-									) : isExcelFile(
-											file.mime_type,
-											file.name,
-									  ) ? (
-										<div className={styles.filePreview}>
-											<div
-												className={
-													styles.filePlaceholder
-												}
-												onClick={(e) => {
-													e.stopPropagation();
-													handleExcelPreview(
-														file.id,
-														file.name,
-													);
-												}}
-											>
-												Preview Excel
-											</div>
-										</div>
-									) : isWordFile(
-											file.mime_type,
-											file.name,
-									  ) ? (
-										<div className={styles.filePreview}>
-											<div
-												className={
-													styles.filePlaceholder
-												}
-												onClick={(e) => {
-													e.stopPropagation();
-													handleWordPreview(
-														file.id,
-														file.name,
-													);
-												}}
-											>
-												Preview Word
-											</div>
-										</div>
-									) : isPlainTextFile(
-											file.mime_type,
-											file.name,
-									  ) ? (
-										<div className={styles.filePreview}>
-											<div
-												className={
-													styles.filePlaceholder
-												}
-											>
-												Text File
-											</div>
-										</div>
-									) : (
-										<div className={styles.fileIcon}>
-											📄
-										</div>
-									)}
+										{getFilePreviewComponent(file)}
 									<div className={styles.fileInfo}>
 										<span className={styles.fileName}>
 											{file.name}

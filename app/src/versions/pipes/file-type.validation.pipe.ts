@@ -8,6 +8,7 @@ const ALLOWED_MIME_TYPES = [
 	// Models
 	'model/gltf-binary',
 	'model/stl',
+	'application/stl',
 	'application/x-stl',
 	'model/obj',
 	'application/x-tgif',

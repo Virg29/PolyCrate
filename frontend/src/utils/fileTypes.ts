@@ -20,7 +20,7 @@ export const previewableMimeTypes: Record<string, PreviewableCategory> = {
 		label: 'PDF preview',
 	},
 	stl: {
-		types: ['application/octet-stream', 'model/stl'],
+		types: ['application/octet-stream', 'model/stl', 'application/stl'],
 		label: '3D Model preview',
 		// Additional check for STL files since they might have octet-stream mime type
 		checkExtension: (fileName: string) =>
