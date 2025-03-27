@@ -9,7 +9,9 @@ const applicationConfig: Config = {
 	cors: {
 		enabled: true,
 		config: {
-			origin: ['http://localhost:5173'], // Frontend development server
+			origin: corsutils.parseCorsConfig(
+				process.env.APP_CORS || 'http://localhost:5173',
+			), // Frontend development server
 			credentials: true,
 			allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
 			methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
