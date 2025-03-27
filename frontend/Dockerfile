@@ -1,19 +1,13 @@
 FROM node:20-alpine as builder
 
-# Create app directory and set permissions
 WORKDIR /app
 RUN chown -R node:node /app
 USER node
 
-# Install dependencies
 COPY --chown=node:node package*.json ./
 RUN npm ci
 
-# Copy source
 COPY --chown=node:node . .
-
-ARG VITE_API_URL
-ENV VITE_API_URL=$VITE_API_URL
 
 # Build
 RUN npm run build
@@ -23,13 +17,24 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-# Install global packages as root
+# Install serve globally
 RUN npm install -g serve
 
+# Create directory for the app
 RUN chown -R node:node /app
 USER node
 
+# Copy the built assets
 COPY --from=builder --chown=node:node /app/dist ./dist
 
+# Create a script to generate runtime config
+RUN echo '#!/bin/sh\n\
+echo "window.ENV = {\n\
+  VITE_API_URL: \"$VITE_API_URL\"\n\
+};" > /app/dist/config.js' > /app/generate-config.sh && \
+chmod +x /app/generate-config.sh
+
 EXPOSE 5173
-CMD ["serve", "-s", "dist", "-l", "5173"]
+
+# Run the config generation script and then start the server
+CMD ["/bin/sh", "-c", "/app/generate-config.sh && serve -s dist -l 5173"]
